@@ -1,0 +1,109 @@
+<h1>Event#show</h1>
+<a href="/user/<%=@user.id%>/edit">Edit My Profile</a>
+
+<h1>Welcome <%= session[:username] %>!</h1>
+
+<p>Here are some of the events at your state</p>
+<table class="table table-striped">
+<thead>	
+		<td>Name</td>
+		<td>Date</td>
+		<td>City</td>
+		<td>State</td>
+		<td>Host</td>
+		<td>Action/Status</td>
+	</thead>
+	<tbody>
+	<% for event in @events %>
+		<% if event.location.state == @user.location.state %>
+			<tr>
+				<td><a href="/event/<%= event.id %>/edit"><%=event.description%></a></td>
+				<td><%=event.date%></td>
+				<td><%=event.location.city%></td>
+				<td><%=event.location.state%></td>
+				<td><%=event.user.first_name%> <%=event.user.last_name%> <%=event.user.email %></td>
+				<td>
+				 <% if event.user.email == current_user.email %>
+					 <a href="event/<%=event.id%>" data-method='patch'>Edit</a>
+					 <a href="event/<%=event.id%>" data-method='delete'>Delete</a>
+
+				<% elsif event.users_joined.include?(current_user) %>
+				    <!-- <form action='/join/<%= event.find_join_id current_user%>' method='post'>
+				      <input type='hidden' name='_method' value='delete'>
+				      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'> -->
+				      <!-- <input type='submit' value='Unjoin'> -->
+				      <!-- <button type='submit' class="btn btn-link">Unjoin</button> -->
+				    <!-- </form> -->
+				    <p>Joining 
+				    <a href= "join/<%= event.find_join_id current_user%>" data-method='delete'>Cancel</a> </p>			 
+				  	
+				  <% else %> 
+				    <!-- <form action='/join' method='post'>
+				      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+				      <input type='hidden' name='event_id' value='<%= event.id %>'>
+				      <button type='submit' class="btn btn-link">Join</button>
+				    </form> -->
+					<a href="/join/<%= event.id %>" data-method="post">Join</a>
+				  <% end %> 
+				</td>
+			</tr>
+		<% end %>
+	<% end %>
+	</tbody>
+</table>
+<br>
+
+
+<p>Here are some of the events at other states</p>
+<table class="table table-striped">
+	<thead>
+		<td>Name</td>
+		<td>Date</td>
+		<td>City</td>
+		<td>State</td>
+		<td>Host</td>
+		<td>Action/Status</td>
+	</thead>
+	<tbody>
+	<% for event in @events %>
+		<% if event.location.state != @user.location.state %>
+			<tr>
+			<td><a href="/event/<%= event.id %>/edit"><%=event.description%></a></td>
+			<td><%=event.date%></td>
+			<td><%=event.location.city%></td>
+			<td><%=event.location.state%></td>
+			<td><%=event.user.first_name%> <%=event.user.last_name%></td>
+			<td>
+				<% if event.user.email == current_user.email %>
+					 <a href="">Edit</a>
+					 <a href="">Delete</a>
+				<% elsif event.users_joined.include?(current_user) %>			    
+				    <p>Joining <a href= "join/<%= event.find_join_id current_user%>" data-method='delete'>Cancel</a> </p>				  	
+				  <% else %> 	    
+					<a href="/join/<%= event.id %>" data-method="post">Join</a>
+				  <% end %> 
+			</td>
+			</tr>
+		<% end %>
+	<% end %>
+	</tbody>
+</table>
+
+
+<div id='add_event'>
+		<h1>Add Event</h1>
+
+		<form action="/event/create" method='post'>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<label for="Name">Event Name:</label><br>
+			<input type="text" id="Event_Name" name="event[description]"><br>
+			<label for="Name">Date:</label><br>
+			<input type="date" id="Date" name="event[date]"><br>
+			<label for="Name">City:</label><br>
+			<input type="text" id="city" name="location[city]"><br>
+			<label for="Name">State:</label><br>
+			<input type="text" id="state" name="location[state]"><br>			
+			<!-- <input type="submit" name="Log In" value='Join'> -->
+			<button type="submit" class="btn btn-primary">Add Event</button>
+		</form>		
+	</div> <!-- end register -->

@@ -1,0 +1,29 @@
+<h1>Edit User</h1>
+
+<form action="/user/<%=@user.id%>" method='post'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input name="_method" type="hidden" value="patch" /> 
+	<label for="Name">First Name:</label><br>
+	<input type="text" id="First Name" name="first_name" value="<%=@user.first_name%>"><br>
+	<label for="Name">Last Name:</label><br>
+	<input type="text" id="Last Name" name="last_name" value="<%=@user.last_name%>"><br>
+	<label for="Name">Email:</label><br>
+	<input type="text" id="Email" name="email" value="<%=@user.email%>"><br>
+	<label for="Name">City:</label><br>
+	<input type="text" id="city" name="city" value="<%=@user.location.city%>"><br>
+	<label for="Name">State:</label><br>
+	<input type="text" id="state" name="state" value="<%=@user.location.state%>"><br>
+
+	<!-- <input type="submit" name="edit" value='Update'> -->
+	<button type="submit" class="btn btn-default">Update</button>
+</form>
+
+<!-- <a href="/user/<%= @user.id %>" data-method="delete">Delete Account</a>  -->
+
+<form action="/user/<%= @user.id %>" id="delete_user" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input name="_method" type="hidden" value="delete" />
+	<!-- <input type="submit" name="delete" value='Delete Account'> -->
+	<button type="submit" class="btn btn-primary">Delete Account</button>
+
+</form>

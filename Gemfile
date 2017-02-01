@@ -5,32 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 gem 'hirb'
-
 gem 'bootstrap-sass', '~> 3.3.6'
+# gem 'rails-footnotes', '>= 4.0.0', '<5'
+# # cmd line reminder > rails g rails_footnotes:install
 
+# gem "paperclip"
 
-gem 'rails-footnotes', '>= 4.0.0', '<5'
-# cmd line reminder > rails g rails_footnotes:install
-
-group :test, :development do
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-end
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-  gem 'rspec'
-  # gem 'rspec-rails'
-  gem 'capybara' #we will be using capybara as well
-  gem 'selenium-webdriver', '~> 3.0.1' #make sure you use the latest webdriver version
-end
-# cmd line reminders   
-#	> bundle install
-#	> rails g rspec:install
-#> rails db:migrate RAILS_ENV=test
-#   > bundle exec rspec
-
+#for APIs
+#gem 'j son' 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
@@ -58,19 +40,13 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'spring',        group: :development
-gem 'rename'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# group :development, :test do
-#   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-#   gem 'byebug', platform: :mri
-# end
-
-
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
+end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

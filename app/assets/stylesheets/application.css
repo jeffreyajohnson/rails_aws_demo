@@ -13,3 +13,41 @@
  *= require_tree .
  *= require_self
  */
+ .container{
+ 	/*background-color: yellow;*/
+
+ }
+#log_in, #register{
+	display: inline-block;
+	border: 1px solid black;
+	border-radius: 10px;
+	vertical-align: top;
+	margin: 20px 40px 0px 0px;
+	padding: 0px 20px 20px 20px;
+
+}
+
+.btn{
+	margin-top: 10px;
+}
+
+table, th, td{
+	 border: 1px solid black;
+}
+
+.btn-link{
+	text-decoration: underline;
+}
+a{
+	text-decoration: underline;
+}
+textarea{
+	width: 400px;
+	height: 300px;
+	text-align: left;
+	padding-left: 0px;
+	margin-left: 0px;
+}
+#add_comment{
+	height: 60px;
+}
