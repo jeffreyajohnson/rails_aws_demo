@@ -10,64 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201191951) do
+ActiveRecord::Schema.define(version: 20170210205145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "discussions", force: :cascade do |t|
-    t.string   "comment"
-    t.integer  "event_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_discussions_on_event_id", using: :btree
-    t.index ["user_id"], name: "index_discussions_on_user_id", using: :btree
-  end
-
-  create_table "events", force: :cascade do |t|
+  create_table "ideas", force: :cascade do |t|
     t.string   "description"
-    t.date     "date"
-    t.integer  "location_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["location_id"], name: "index_events_on_location_id", using: :btree
-    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
+    t.index ["user_id"], name: "index_ideas_on_user_id", using: :btree
   end
 
-  create_table "joins", force: :cascade do |t|
+  create_table "likes", force: :cascade do |t|
+    t.integer  "idea_id"
     t.integer  "user_id"
-    t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_joins_on_event_id", using: :btree
-    t.index ["user_id"], name: "index_joins_on_user_id", using: :btree
-  end
-
-  create_table "locations", force: :cascade do |t|
-    t.string   "city"
-    t.string   "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_likes_on_idea_id", using: :btree
+    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "name"
+    t.string   "alias"
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "location_id"
-    t.index ["location_id"], name: "index_users_on_location_id", using: :btree
   end
 
-  add_foreign_key "discussions", "events"
-  add_foreign_key "discussions", "users"
-  add_foreign_key "events", "locations"
-  add_foreign_key "events", "users"
-  add_foreign_key "joins", "events"
-  add_foreign_key "joins", "users"
-  add_foreign_key "users", "locations"
+  add_foreign_key "ideas", "users"
+  add_foreign_key "likes", "ideas"
+  add_foreign_key "likes", "users"
 end

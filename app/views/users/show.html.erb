@@ -1,0 +1,9 @@
+<a href="/bright_ideas">Bright Ideas</a>
+<h3>Name: <%=@user.name%></h3>
+<h3>Alias: <%=@user.alias%></h3>
+<h3>Email: <%=@user.email%></h3>
+
+<hr>
+<p>Total number of Posts: <%= @user.find_user_idea_count @user.id %></p>
+<p>Total number of Likes: <%= @user.likes.count %></p>
+

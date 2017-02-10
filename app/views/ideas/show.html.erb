@@ -1,0 +1,26 @@
+
+<a href="/bright_ideas">Bright Ideas</a>
+<br>
+<table>
+	<tr>
+		<td><%= @idea.user.name %> says:</td>
+		<td><textarea><%= @idea.description %></textarea></td>
+	</tr>
+</table>
+
+
+<p>People who liked this post</p>	
+
+<table>
+	<thead>	
+			<td>Alias</td>
+			<td>Name</td>
+	</thead>
+	<tbody>
+	<% for user in @users %>
+		<tr>
+			<td><a href="/users/<%= user.id %>"><%=user.alias%></a></td>
+			<td><%=user.name%></td>			
+		</tr>
+	<% end %>
+</table>

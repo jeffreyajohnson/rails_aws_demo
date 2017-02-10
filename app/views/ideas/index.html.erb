@@ -1,0 +1,38 @@
+<h1>Hello <%= session[:username] %>!</h1>
+
+<div id='add_idea'>
+	
+	<form action="/bright_ideas" method='post'>
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		<textarea name="description" placeholder="Post your idea here..."></textarea>				
+		<button type="submit" class="btn btn-primary">Idea!</button>
+	</form>		
+</div> <!-- end add_idea -->
+
+
+<div id="idea_display">
+<table>
+	<% for idea in @ideas %>
+		<tr>
+			<td><a href="/users/<%=idea.user.id%>"><%= idea.user.name %></a> says:</td>
+			<td><textarea><%= idea.description %></textarea></td>
+			<td>
+				<% if idea.user == current_user %>
+					<a href="/bright_ideas/<%= idea.id %>" data-method="delete">Delete this idea</a>
+				<% end %>
+			</td>			
+		</tr>
+		<tr>
+			<td><a href="/likes/<%= idea.id %>">Like</a></td>
+			<td><a href="/bright_ideas/<%=idea.id%>"><%= idea.likes.count %> people </a>liked this</td>	
+		</tr>
+
+		
+	<% end %>
+	<br>
+</table>
+	
+</div>
+
+
+				
