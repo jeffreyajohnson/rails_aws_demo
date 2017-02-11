@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get 'bright_ideas/:id' => 'ideas#show'
   get 'bright_ideas/edit'
   get 'bright_ideas/update'
-  delete 'bright_ideas/destroy'
+  delete 'bright_ideas/:id' => 'ideas#destroy'
 
   get 'likes/index'
   get 'likes/new'

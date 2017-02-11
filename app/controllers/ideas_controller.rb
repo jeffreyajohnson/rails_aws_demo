@@ -39,5 +39,7 @@ class IdeasController < ApplicationController
   end
 
   def destroy
+    idea = Idea.find(params[:id]).destroy
+    redirect_to '/bright_ideas'
   end
 end
